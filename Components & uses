@@ -44,9 +44,11 @@ ELK stands for **Elasticsearch**, **Logstash**, and **Kibana**. Here’s how eac
    - Helps in setting up alerts for unusual patterns or error rates, enabling quick response to incidents.
 
 6. **DevOps Monitoring**:
-   - Logs from different components of a CI/CD pipeline or microservices architecture can be monitored, providing end-to-end visibility across the deployment lifecycle.
+   - Logs from different components of a CI/CD pipeline or microservices architecture can be monitored, providing end-to-end 
+visibility across the deployment lifecycle.
 
 7. **IoT Data Collection and Analysis**:
    - Ingest, process, and analyze large amounts of IoT data for trends, patterns, and alerts.
 
-The ELK stack provides a powerful framework for processing, analyzing, and visualizing data at scale, making it a popular choice across various industries for log analysis and real-time monitoring.
+The ELK stack provides a powerful framework for processing, analyzing, and visualizing data at scale, making it a popular 
+choice across various industries for log analysis and real-time monitoring.
