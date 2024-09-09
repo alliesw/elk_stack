@@ -97,4 +97,5 @@ Ingesting network device logs into the ELK stack can provide real-time monitorin
 - **Traffic anomalies**: A line graph that tracks bandwidth usage or log volume spikes over time.
 - **Firewall events**: A table showing specific firewall events (e.g., denied traffic, allowed traffic, port scans).
 
-By configuring your network devices to send logs to Logstash and using Elasticsearch to store and analyze the data, you can gain deep insights into your network’s health, performance, and security using the ELK stack.
+By configuring your network devices to send logs to Logstash and using Elasticsearch to store and analyze the data, you can gain deep insights into 
+your network’s health, performance, and security using the ELK stack.
