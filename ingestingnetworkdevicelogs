@@ -11,7 +11,8 @@ Ingesting network device logs into the ELK stack can provide real-time monitorin
    
    **Steps**:
    - **Install Logstash**: Ensure that Logstash is properly installed and running on your system.
-   - **Input Plugin**: Configure an input plugin to collect logs from network devices. Network devices typically send logs over syslog or SNMP, so you'll need to configure Logstash to receive data in these formats.
+   - **Input Plugin**: Configure an input plugin to collect logs from network devices. Network devices typically send logs over syslog or SNMP, 
+so you'll need to configure Logstash to receive data in these formats.
      - Use the `syslog` input plugin to receive logs from network devices:
        ```yaml
        input {
@@ -33,7 +34,8 @@ Ingesting network device logs into the ELK stack can provide real-time monitorin
        }
        ```
 
-   - **Filter Plugin**: Network logs can be complex, so it’s useful to parse and filter them for better analysis. The filter plugin can parse the log content, extract useful fields, and normalize the data.
+   - **Filter Plugin**: Network logs can be complex, so it’s useful to parse and filter them for better analysis. 
+The filter plugin can parse the log content, extract useful fields, and normalize the data.
      - For example, use the `grok` filter to extract specific fields from syslog messages:
        ```yaml
        filter {
@@ -61,7 +63,8 @@ Ingesting network device logs into the ELK stack can provide real-time monitorin
    - **SNMP Traps (Optional)**: If you’re using SNMP, configure network devices to send SNMP traps to your Logstash instance.
 
 #### 4. **Set Up Kibana for Visualization**:
-   - **Install and Configure Kibana**: Kibana will provide visualizations and dashboards for your network logs. Install it on the same or separate server and connect it to Elasticsearch.
+   - **Install and Configure Kibana**: Kibana will provide visualizations and dashboards for your network logs. Install it on the same or separate server 
+and connect it to Elasticsearch.
    - **Create Index Patterns**: In Kibana, go to "Management" > "Index Patterns" and create an index pattern for your network logs (e.g., `network-device-logs-*`).
    - **Create Dashboards**: Using Kibana, you can create real-time dashboards to monitor your network devices. Some useful visualizations include:
      - Top devices generating logs.
@@ -71,11 +74,14 @@ Ingesting network device logs into the ELK stack can provide real-time monitorin
      - Security-related events from firewalls.
 
 #### 5. **Monitoring and Alerting**:
-   - **Use Kibana’s Alerting Features**: You can set up alerts in Kibana to notify you of any anomalies, such as when a certain threshold of errors is exceeded, or certain security events (e.g., firewall breaches) occur.
-   - **Elasticsearch Watcher (Optional)**: If you need more advanced alerting, you can use Elasticsearch's Watcher feature (available in the X-Pack) to trigger alerts when certain conditions are met.
+   - **Use Kibana’s Alerting Features**: You can set up alerts in Kibana to notify you of any anomalies, such as when a certain threshold of errors is 
+exceeded, or certain security events (e.g., firewall breaches) occur.
+   - **Elasticsearch Watcher (Optional)**: If you need more advanced alerting, you can use Elasticsearch's Watcher feature (available in the X-Pack) 
+to trigger alerts when certain conditions are met.
 
 #### 6. **Optimize and Scale**:
-   - **Retention Policy**: Depending on the volume of logs, you might want to configure Elasticsearch to purge old data automatically by setting up index lifecycle policies.
+   - **Retention Policy**: Depending on the volume of logs, you might want to configure Elasticsearch to purge old data automatically by setting up 
+index lifecycle policies.
    - **Scalability**: As your network grows, you might need to scale Elasticsearch and Logstash by adding more nodes to handle the increased log volume.
 
 ### Example Use Cases for Ingesting Network Logs:
