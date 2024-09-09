@@ -1,7 +1,7 @@
 The ELK Stack is a powerful collection of open-source tools used for searching, analyzing, and visualizing log and other machine data in real-time. ELK stands for **Elasticsearch**, **Logstash**, and **Kibana**. Here’s how each component functions and the use cases for the ELK stack:
 
 ### 1. **Elasticsearch**:
-   - **Purpose**: A distributed search and analytics engine.
+   - **Purpose**: A distributed search and analytics engine. 
    - **Uses**:
      - Indexing and searching large volumes of structured or unstructured data.
      - Full-text search capabilities for logs, metrics, and even raw documents.
