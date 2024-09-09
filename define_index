@@ -1,0 +1,201 @@
+Defining an Elasticsearch index within the ELK stack to satisfy a given set of requirements involves several key steps, including index creation, specifying index mappings, settings, and configurations. The following example will guide you through how to define an index based on a set of typical requirements.
+
+### **Example Requirements for the Index**:
+1. **Store network device logs** (firewall, router, and switch logs).
+2. **Log structure**:
+   - Timestamp
+   - Device type (e.g., router, switch, firewall)
+   - Device IP address
+   - Severity level (e.g., INFO, WARNING, ERROR)
+   - Log message (unstructured text)
+   - Source and destination IP addresses for traffic logs
+3. **Store data for up to 30 days** (automatically delete older logs).
+4. **Create a custom analyzer** for searching log messages.
+5. **Optimize storage** by using efficient data types.
+6. **Partition by device type**.
+
+---
+
+### **1. Create the Index in Elasticsearch**:
+
+To define an index with the above requirements, you will need to define the following:
+
+- **Index Settings**: Including the number of shards, replicas, and a custom analyzer for the log messages.
+- **Mappings**: Define the structure (schema) of your data, including data types and field options.
+- **Index Lifecycle Management (ILM)**: To automatically delete old logs.
+
+Here’s how you can define the index:
+
+#### **Index Creation Request (JSON Format)**
+
+```json
+PUT /network-device-logs
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1,
+    "analysis": {
+      "analyzer": {
+        "custom_log_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "stop"]
+        }
+      }
+    },
+    "index.lifecycle.name": "log_retention_policy"
+  },
+  "mappings": {
+    "properties": {
+      "timestamp": {
+        "type": "date"
+      },
+      "device_type": {
+        "type": "keyword"
+      },
+      "device_ip": {
+        "type": "ip"
+      },
+      "severity_level": {
+        "type": "keyword"
+      },
+      "log_message": {
+        "type": "text",
+        "analyzer": "custom_log_analyzer"
+      },
+      "source_ip": {
+        "type": "ip"
+      },
+      "destination_ip": {
+        "type": "ip"
+      }
+    }
+  }
+}
+```
+
+### **2. Breakdown of Index Definition**:
+
+- **Settings**:
+  - `"number_of_shards": 3`: Three primary shards to split the data into manageable parts. You can adjust the number of shards depending on the expected size of the logs.
+  - `"number_of_replicas": 1`: One replica per shard for fault tolerance.
+  - **Analyzer**:
+    - A custom analyzer `"custom_log_analyzer"` is defined for the `log_message` field. It uses:
+      - `standard` tokenizer: Breaks text into individual tokens.
+      - `lowercase` filter: Converts all tokens to lowercase.
+      - `stop` filter: Removes common stop words like "the", "is", etc.
+
+- **Mappings**:
+  - **timestamp** (`date`): The time when the log event occurred.
+  - **device_type** (`keyword`): Fixed device type, useful for aggregations and filters.
+  - **device_ip** (`ip`): Stores the IP address of the network device.
+  - **severity_level** (`keyword`): Fixed log level for efficient filtering (e.g., "INFO", "ERROR").
+  - **log_message** (`text`): Stores the unstructured log message and applies the custom log analyzer for search and analysis.
+  - **source_ip** and **destination_ip** (`ip`): Stores IP addresses involved in traffic logs.
+
+---
+
+### **3. Index Lifecycle Management (ILM)**:
+
+To automatically delete logs older than 30 days, set up an **Index Lifecycle Policy**. This helps manage data retention in Elasticsearch.
+
+#### **Create an ILM Policy**:
+
+```json
+PUT _ilm/policy/log_retention_policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_age": "30d",
+            "max_size": "50gb"
+          }
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+```
+
+- **Hot Phase**: In this phase, Elasticsearch rolls over to a new index when the index reaches 30 days or 50 GB.
+- **Delete Phase**: After 30 days, the logs are deleted to save space.
+
+### **4. Partition Data by Device Type**:
+
+If you want to partition your logs by device type (router, switch, firewall), you can use **index templates** or separate indexes per device type. Here's an example using index templates:
+
+#### **Index Template for Router Logs**:
+
+```json
+PUT _template/router_logs
+{
+  "index_patterns": ["router-*"],
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "properties": {
+      "timestamp": { "type": "date" },
+      "device_ip": { "type": "ip" },
+      "severity_level": { "type": "keyword" },
+      "log_message": { "type": "text", "analyzer": "custom_log_analyzer" }
+    }
+  }
+}
+```
+
+- Use different templates for different devices. For example, `router-*`, `switch-*`, `firewall-*` indexes, each with their own configuration.
+  
+---
+
+### **5. Optimize for Performance and Storage**:
+
+- **Use Efficient Data Types**: 
+  - Use `keyword` for fields that require exact matching (e.g., `device_type`, `severity_level`).
+  - Use `text` with analyzers for full-text search fields (e.g., `log_message`).
+  - Use `ip` for IP address fields (e.g., `device_ip`, `source_ip`, `destination_ip`).
+  
+- **Minimize Field Mapping**: Only index fields that are necessary for your queries and visualizations to avoid unnecessary storage overhead.
+
+---
+
+### **6. Query and Analyze Logs**:
+
+Once your index is set up, you can query logs using Kibana or via direct Elasticsearch queries. Here’s an example of a query to fetch **ERROR** level logs from a specific router:
+
+```json
+GET /network-device-logs/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "device_type": "router" }},
+        { "term": { "severity_level": "ERROR" }}
+      ],
+      "filter": {
+        "range": {
+          "timestamp": {
+            "gte": "now-1d/d",
+            "lt": "now/d"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+This query retrieves logs from routers where the severity is `ERROR` and the logs are from the last day.
+
+---
+
+By setting up the index as described, you can efficiently manage network device logs, provide custom analysis, and ensure data retention policies are in place, all while optimizing for performance and storage.
