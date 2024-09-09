@@ -1,6 +1,6 @@
 Ingesting network device logs into the ELK stack can provide real-time monitoring, analysis, and visualization of network performance, security, and operational issues. Here's how you can set up the ELK stack to ingest network device logs such as router logs, firewall logs, or switch logs:
 
-### Steps to Ingest Network Device Logs into ELK
+### Steps to Ingest Network Device Logs into ELK:
 
 #### 1. **Set Up Elasticsearch**:
    - Install and configure **Elasticsearch** as your data storage and search engine.
