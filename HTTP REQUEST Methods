@@ -1,9 +1,12 @@
-HTTP methods: POST, GET, PUT, PATCH, DELETE are similar to CURD (create, update, read, delete) operations in the database. [PGPPD] create-read-update-delete
+HTTP methods: POST, GET, PUT, PATCH, DELETE are similar to CURD (create, update, read, delete) operations in the database. [PGPPD] create-read-updatef-updatep-delete
 Create NEW record =>POST
 read=>GET
 If the record exists then update else create a new record=>PUT
 update/modify=>PATCH
 delete=>DELETE
+
+The PUT and PATCH methods are used to update an existing resource. 
+- PUT replaces the entire resource, while PATCH specifies only the changes
 
 POST VS PUT:
 The PUT method requests that the state of the target resource be created or replaced with the state 
