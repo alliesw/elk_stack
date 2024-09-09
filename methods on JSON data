@@ -1,4 +1,5 @@
-In the context of HTTP (Hypertext Transfer Protocol), JSON (JavaScript Object Notation) is often used as a lightweight data format for communication between a client (like a web browser or mobile app) and a server. When making HTTP requests using JSON, the client sends a request to the server, which processes it and returns a response.
+In the context of HTTP (Hypertext Transfer Protocol), JSON (JavaScript Object Notation) is often used as a lightweight data format for communication between a client 
+(like a web browser or mobile app) and a server. When making HTTP requests using JSON, the client sends a request to the server, which processes it and returns a response.
 
 There are several HTTP methods (also called **verbs**) used for different operations in the context of RESTful APIs. Here’s an overview of the most common methods, explained in the context of using JSON data:
 
