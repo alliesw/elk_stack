@@ -2,8 +2,6 @@ In the context of HTTP (Hypertext Transfer Protocol), JSON (JavaScript Object No
 
 There are several HTTP methods (also called **verbs**) used for different operations in the context of RESTful APIs. Here’s an overview of the most common methods, explained in the context of using JSON data:
 
----
-
 ### 1. **GET**:
    - **Purpose**: To retrieve data from the server.
    - **How it works**: When the client sends a GET request, it asks the server for information (e.g., fetching data from a database). No data is included in the request body, and the response typically contains the requested data, often in JSON format.
