@@ -56,7 +56,8 @@ The filter plugin can parse the log content, extract useful fields, and normaliz
      ```
 
 #### 3. **Forward Logs from Network Devices**:
-   - **Syslog Configuration**: Configure your network devices (routers, switches, firewalls, etc.) to forward logs to the Logstash server using the syslog protocol. Typically, this involves setting the syslog destination to the IP address and port (514) of the Logstash instance.
+   - **Syslog Configuration**: Configure your network devices (routers, switches, firewalls, etc.) to forward logs to the Logstash server using the syslog protocol. 
+Typically, this involves setting the syslog destination to the IP address and port (514) of the Logstash instance.
      - On a Cisco router or switch, for example, you can set the syslog server with commands like:
        ```bash
        Router(config)# logging host <logstash_server_ip> transport udp port 514
