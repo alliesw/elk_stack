@@ -1,7 +1,33 @@
+### Comparison of HTTP Methods:
+
+| HTTP Method | Purpose                    | Idempotent | Request Body | Use Case Example                         |
+|-------------|----------------------------|------------|--------------|------------------------------------------|
+| **GET**     | Retrieve data               | Yes        | No           | Fetching a list of users                 |
+| **POST**    | Create new data             | No         | Yes          | Creating a new user                      |
+| **PUT**     | Update/replace data         | Yes        | Yes          | Updating a user’s complete information   |
+| **PATCH**   | Partially update data       | Yes        | Yes          | Updating a user’s email only             |
+| **DELETE**  | Delete a resource           | Yes        | No           | Deleting a user                          |
+| **OPTIONS** | Retrieve allowed methods    | Yes        | No           | Checking what methods a resource supports|
+| **HEAD**    | Retrieve metadata only      | Yes        | No           | Checking if a file exists without downloading |
+
+---
+
+### Summary:
+- **GET**: Retrieves data from the server.
+- **POST**: Sends data to the server to create a resource.
+- **PUT**: Replaces the entire resource with new data.
+- **PATCH**: Partially updates the resource with new data.
+- **DELETE**: Removes a resource from the server.
+- **OPTIONS**: Provides the HTTP methods available for a resource.
+- **HEAD**: Retrieves headers without fetching the actual data.
+
+Each of these methods is commonly used in REST APIs and applications, often with JSON-formatted data in the request or response bodies.
+
 In the context of HTTP (Hypertext Transfer Protocol), JSON (JavaScript Object Notation) is often used as a lightweight data format for communication between a client 
 (like a web browser or mobile app) and a server. When making HTTP requests using JSON, the client sends a request to the server, which processes it and returns a response.
 
 There are several HTTP methods (also called **verbs**) used for different operations in the context of RESTful APIs. Here’s an overview of the most common methods, explained in the context of using JSON data:
+
 
 ### 1. **GET**:
    - **Purpose**: To retrieve data from the server.
@@ -144,27 +170,4 @@ Last-Modified: Wed, 21 Oct 2020 07:28:00 GMT
      
 
 
-### Comparison of HTTP Methods:
-
-| HTTP Method | Purpose                    | Idempotent | Request Body | Use Case Example                         |
-|-------------|----------------------------|------------|--------------|------------------------------------------|
-| **GET**     | Retrieve data               | Yes        | No           | Fetching a list of users                 |
-| **POST**    | Create new data             | No         | Yes          | Creating a new user                      |
-| **PUT**     | Update/replace data         | Yes        | Yes          | Updating a user’s complete information   |
-| **PATCH**   | Partially update data       | Yes        | Yes          | Updating a user’s email only             |
-| **DELETE**  | Delete a resource           | Yes        | No           | Deleting a user                          |
-| **OPTIONS** | Retrieve allowed methods    | Yes        | No           | Checking what methods a resource supports|
-| **HEAD**    | Retrieve metadata only      | Yes        | No           | Checking if a file exists without downloading |
-
----
-
-### Summary:
-- **GET**: Retrieves data from the server.
-- **POST**: Sends data to the server to create a resource.
-- **PUT**: Replaces the entire resource with new data.
-- **PATCH**: Partially updates the resource with new data.
-- **DELETE**: Removes a resource from the server.
-- **OPTIONS**: Provides the HTTP methods available for a resource.
-- **HEAD**: Retrieves headers without fetching the actual data.
-
-Each of these methods is commonly used in REST APIs and applications, often with JSON-formatted data in the request or response bodies.	
+	
