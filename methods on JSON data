@@ -1,6 +1,6 @@
-### Comparison of HTTP Methods:
+### Comparison of HTTP Methods: g-p-pf-pu-d get-post-put(full)-patch(part)-delete r-c-u-pu-d [RCU PU-D] 
 
-| HTTP Method | Purpose                    | Idempotent | Request Body | Use Case Example                         |
+| HTTP Method | Purpose                    | Idempotent | Request Body | Use Case Example                         |  
 |-------------|----------------------------|------------|--------------|------------------------------------------|
 | **GET**     | Retrieve data               | Yes        | No           | Fetching a list of users                 |
 | **POST**    | Create new data             | No         | Yes          | Creating a new user                      |
@@ -18,7 +18,7 @@
 - **PUT**: Replaces the entire resource with new data.
 - **PATCH**: Partially updates the resource with new data.
 - **DELETE**: Removes a resource from the server.
-- **OPTIONS**: Provides the HTTP methods available for a resource.
+- **OPTIONS**: Provides the HTTP methods available for a resource. 
 - **HEAD**: Retrieves headers without fetching the actual data.
 
 Each of these methods is commonly used in REST APIs and applications, often with JSON-formatted data in the request or response bodies.
